@@ -1,19 +1,21 @@
-import React , {Component} from 'react';
+import React, {useState} from 'react';
 import Person from './Person/Person';
 
-class App extends Component{
-  
-  state = {
+const App = () => {
+
+  const [personState, setPersonState] = useState({
     persons: [
       {name: "Max", age: 20},
       {name: "Manu", age: 29},
       {name: "Stephanie", age: 26},
-    ]
-  }
+    ],
+    otherState: 'Some value'
+  })
 
-  switchNameHandler = () => {
-    console.log('Was clicked')
-    this.setState({
+  console.log(personState); //useState basically replaces the original state with the updated one
+
+  const switchNameHandler = () => {
+    setPersonState({
       persons: [
         {name: "Maximillian", age: 20},
         {name: "Manu", age: 29},
@@ -22,16 +24,14 @@ class App extends Component{
     })
   }
 
-  render(){
     return (
       <div>
         <h1>I am React App</h1>
-        <button onClick={this.switchNameHandler}>Switch name</button>
+        <button onClick={switchNameHandler}>Switch name</button>
         <Person />
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
+        <Person name={personState.persons[0].name} age={personState.persons[0].age}/>
       </div>
     );
-  }
   
   // return React.createElement('div',{className:'App'},React.createElement('h1',null,'Hi There'))
 }
